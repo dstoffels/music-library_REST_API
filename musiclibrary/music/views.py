@@ -43,3 +43,16 @@ class SongDetail(APIView):
     song = self.get_song(id)
     song.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+class SongLike(APIView):
+  def get_song(self,id):
+    try:
+      return Song.objects.get(pk=id)
+    except Song.DoesNotExist:
+      raise Http404
+
+  def put(self, request, id):
+    song = self.get_song(id)
+    song.like()
+    serializer = SongSerializer(song)
+    return Response(serializer.data)
