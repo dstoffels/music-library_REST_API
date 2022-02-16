@@ -9,6 +9,7 @@ class Song(models.Model):
   genre = models.CharField(max_length=50)
   release_date = models.DateField()
   likes = models.IntegerField(default=0)
+  image = models.ImageField(upload_to='images')
 
   def like(self):
     self.likes += 1
